@@ -3,6 +3,9 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .go-board {
@@ -13,6 +16,7 @@
   border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   position: relative;
+  max-width: 100%;
 }
 
 .intersection {
@@ -22,6 +26,88 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Mobile phones (portrait) - smaller board */
+@media (max-width: 480px) {
+  .go-board-container {
+    padding: 5px;
+  }
+
+  .go-board {
+    padding: 15px;
+  }
+
+  .intersection {
+    width: 32px;
+    height: 32px;
+  }
+
+  .stone {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .intersection.clickable:hover::before {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+/* Small phones and narrow screens */
+@media (max-width: 360px) {
+  .go-board {
+    padding: 10px;
+  }
+
+  .intersection {
+    width: 28px;
+    height: 28px;
+  }
+
+  .stone {
+    width: 24px !important;
+    height: 24px !important;
+  }
+}
+
+/* Tablets (portrait) - medium board */
+@media (min-width: 481px) and (max-width: 768px) {
+  .go-board-container {
+    padding: 15px;
+  }
+
+  .go-board {
+    padding: 30px;
+  }
+
+  .intersection {
+    width: 50px;
+    height: 50px;
+  }
+
+  .stone {
+    width: 45px !important;
+    height: 45px !important;
+  }
+
+  .intersection.clickable:hover::before {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+/* Tablets (landscape) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .intersection {
+    width: 55px;
+    height: 55px;
+  }
+
+  .stone {
+    width: 50px !important;
+    height: 50px !important;
+  }
 }
 
 /* Horizontal lines */

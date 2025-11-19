@@ -4,12 +4,66 @@
   border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   min-width: 300px;
+  max-width: 100%;
+  width: 100%;
 }
 
 .game-info h1 {
   margin-bottom: 20px;
   color: #333;
   font-size: 28px;
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  .game-info {
+    padding: 20px;
+    min-width: unset;
+    width: calc(100vw - 30px);
+    max-width: 400px;
+  }
+
+  .game-info h1 {
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+
+  .status {
+    padding: 12px;
+    margin-bottom: 20px;
+  }
+
+  .current-turn {
+    font-size: 16px;
+  }
+
+  .controls {
+    gap: 8px;
+  }
+
+  .btn {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+}
+
+/* Tablets */
+@media (min-width: 481px) and (max-width: 768px) {
+  .game-info {
+    max-width: 500px;
+    width: 90vw;
+  }
+
+  .game-info h1 {
+    font-size: 24px;
+  }
+}
+
+/* Desktop - limit max width */
+@media (min-width: 1025px) {
+  .game-info {
+    max-width: 350px;
+  }
 }
 
 .status {

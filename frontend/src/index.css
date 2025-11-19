@@ -16,9 +16,29 @@ body {
   justify-content: center;
   align-items: center;
   padding: 20px;
+  overflow-x: hidden;
 }
 
 #root {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
+}
+
+/* Mobile optimization */
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+    align-items: flex-start;
+  }
+
+  #root {
+    width: 100%;
+  }
+}
+
+/* Prevent horizontal scroll on small screens */
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
 }

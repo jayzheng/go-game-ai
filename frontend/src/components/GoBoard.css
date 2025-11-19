@@ -1,0 +1,112 @@
+.go-board-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.go-board {
+  display: grid;
+  gap: 0;
+  background: #dcb35c;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.intersection {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Horizontal lines */
+.intersection::before {
+  content: '';
+  position: absolute;
+  height: 2px;
+  background: #2c2416;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+/* Vertical lines */
+.intersection::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  background: #2c2416;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+}
+
+/* Truncate horizontal line on first column (left edge) */
+.intersection:nth-child(9n+1)::before {
+  left: 50%;
+}
+
+/* Truncate horizontal line on last column (right edge) */
+.intersection:nth-child(9n)::before {
+  right: 50%;
+}
+
+/* Truncate vertical line on first row (top edge) */
+.intersection:nth-child(-n+9)::after {
+  top: 50%;
+}
+
+/* Truncate vertical line on last row (bottom edge) */
+.intersection:nth-last-child(-n+9)::after {
+  bottom: 50%;
+}
+
+.intersection.clickable {
+  cursor: pointer;
+}
+
+.intersection.clickable:hover::before {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+}
+
+.stone {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.stone.black {
+  background: radial-gradient(circle at 30% 30%, #4a4a4a, #000);
+}
+
+.stone.white {
+  background: radial-gradient(circle at 30% 30%, #fff, #ddd);
+}
+
+.legal-marker {
+  display: none;
+}
+
+/* Star points for 9x9 board */
+.go-board .cell:nth-child(5n+3) {
+  position: relative;
+}

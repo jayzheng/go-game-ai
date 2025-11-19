@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import GoBoard from './components/GoBoard';
 import GameInfo from './components/GameInfo';
 import GameList from './components/GameList';
+import TrainingDashboard from './components/TrainingDashboard';
 import { gameAPI } from './services/api';
 import { GoEngine } from './utils/goEngine';
 import './App.css';
@@ -17,6 +18,7 @@ function App() {
   const [replayIndex, setReplayIndex] = useState(0);
   const [replayEngine, setReplayEngine] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [showTrainingDashboard, setShowTrainingDashboard] = useState(false);
 
   useEffect(() => {
     startNewGame();
@@ -200,6 +202,22 @@ function App() {
     );
   }
 
+  // Show training dashboard if enabled
+  if (showTrainingDashboard) {
+    return (
+      <div className="app">
+        <button
+          onClick={() => setShowTrainingDashboard(false)}
+          className="btn btn-secondary"
+          style={{ margin: '20px' }}
+        >
+          Back to Game
+        </button>
+        <TrainingDashboard />
+      </div>
+    );
+  }
+
   return (
     <div className="app">
       {message && <div className="message">{message}</div>}
@@ -222,6 +240,7 @@ function App() {
           onPass={handlePass}
           onSave={handleSave}
           onViewGames={() => setShowGameList(true)}
+          onViewTraining={() => setShowTrainingDashboard(true)}
         />
       </div>
 

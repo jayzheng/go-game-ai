@@ -9,7 +9,8 @@ const GameInfo = ({
   onNewGame,
   onPass,
   onSave,
-  onViewGames
+  onViewGames,
+  onViewTraining
 }) => {
   const playerName = currentPlayer === 1 ? 'Black' : 'White';
 
@@ -68,6 +69,11 @@ const GameInfo = ({
         <button onClick={onViewGames} className="btn btn-info">
           View Saved Games
         </button>
+        {onViewTraining && (
+          <button onClick={onViewTraining} className="btn btn-info">
+            AI Training Dashboard
+          </button>
+        )}
       </div>
     </div>
   );

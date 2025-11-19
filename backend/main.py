@@ -6,6 +6,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
 from app.api.routes import router
+from app.api.training_routes import router as training_router
+from app.api.test_routes import router as test_router
 from app.db.database import init_db
 
 
@@ -34,6 +36,8 @@ app.add_middleware(
 
 # Include routes
 app.include_router(router, prefix="/api", tags=["game"])
+app.include_router(training_router)
+app.include_router(test_router)
 
 
 @app.get("/")

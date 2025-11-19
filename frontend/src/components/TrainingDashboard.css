@@ -1,0 +1,446 @@
+.training-dashboard {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.training-dashboard h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  border-bottom: 2px solid #eee;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.tab {
+  padding: 12px 24px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  color: #666;
+  transition: all 0.3s;
+}
+
+.tab:hover {
+  color: #2196f3;
+  background: #f5f5f5;
+}
+
+.tab.active {
+  color: #2196f3;
+  border-bottom-color: #2196f3;
+}
+
+.tab-content {
+  padding: 20px;
+}
+
+.tab-content h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.tab-content h3 {
+  color: #555;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+/* Status Tab */
+.initialization-section {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.config-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.config-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-weight: 600;
+}
+
+.config-form input {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.status-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.status-card {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 6px;
+}
+
+.status-card p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+.control-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.recent-metrics {
+  margin-top: 20px;
+}
+
+.recent-metrics table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.recent-metrics th,
+.recent-metrics td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.recent-metrics th {
+  background: #f5f5f5;
+  font-weight: 600;
+}
+
+/* Architecture Tab */
+.architecture-info {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.arch-summary {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 6px;
+}
+
+.arch-summary p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.layers-list {
+  overflow-x: auto;
+}
+
+.layers-table {
+  margin-top: 15px;
+  overflow-x: auto;
+}
+
+.layers-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.layers-table th,
+.layers-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.layers-table th {
+  background: #f5f5f5;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+}
+
+.layer-name {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: #2196f3;
+}
+
+/* Checkpoints Tab */
+.checkpoints-list {
+  margin-top: 20px;
+}
+
+.checkpoints-list table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.checkpoints-list th,
+.checkpoints-list td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.checkpoints-list th {
+  background: #f5f5f5;
+  font-weight: 600;
+}
+
+.checkpoints-list tr.selected {
+  background: #e3f2fd;
+}
+
+.checkpoint-details {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 6px;
+  margin-top: 20px;
+}
+
+.checkpoint-details p {
+  margin: 8px 0;
+}
+
+.weight-stats-table {
+  margin-top: 15px;
+  overflow-x: auto;
+}
+
+.weight-stats-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.weight-stats-table th,
+.weight-stats-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.weight-stats-table th {
+  background: #fff;
+  font-weight: 600;
+}
+
+/* Metrics Tab */
+.metrics-visualization {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.metrics-summary {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 6px;
+}
+
+.metrics-summary p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+.metrics-table {
+  overflow-x: auto;
+}
+
+.metrics-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.metrics-table th,
+.metrics-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.metrics-table th {
+  background: #f5f5f5;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+}
+
+/* Games Tab */
+.games-list {
+  margin-top: 20px;
+}
+
+.games-list table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.games-list th,
+.games-list td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.games-list th {
+  background: #f5f5f5;
+  font-weight: 600;
+}
+
+/* Buttons */
+.btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #2196f3;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #1976d2;
+}
+
+.btn-secondary {
+  background: #ff9800;
+  color: white;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #f57c00;
+}
+
+.btn-success {
+  background: #4caf50;
+  color: white;
+}
+
+.btn-success:hover:not(:disabled) {
+  background: #388e3c;
+}
+
+.btn-info {
+  background: #9c27b0;
+  color: white;
+}
+
+.btn-info:hover:not(:disabled) {
+  background: #7b1fa2;
+}
+
+.btn-small {
+  padding: 6px 12px;
+  background: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.btn-small:hover {
+  background: #1976d2;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .training-dashboard {
+    padding: 10px;
+  }
+
+  .tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+
+  .tab {
+    padding: 10px 16px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  .tab-content {
+    padding: 10px;
+  }
+
+  .control-buttons {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  table {
+    font-size: 12px;
+  }
+
+  th, td {
+    padding: 8px 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .training-dashboard h1 {
+    font-size: 22px;
+  }
+
+  .tab {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .status-card p,
+  .arch-summary p,
+  .metrics-summary p {
+    font-size: 14px;
+  }
+
+  table {
+    font-size: 11px;
+  }
+
+  th, td {
+    padding: 6px 4px;
+  }
+}

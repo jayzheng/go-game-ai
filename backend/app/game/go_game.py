@@ -14,7 +14,7 @@ class Player(Enum):
 
 
 class GoGame:
-    def __init__(self, board_size: int = 9, komi: float = 7.5):
+    def __init__(self, board_size: int = 9, komi: float = 7.5, max_moves: Optional[int] = None):
         """
         Initialize Go game.
 
@@ -22,6 +22,8 @@ class GoGame:
             board_size: Size of the board (default 9x9)
             komi: Compensation points for White (default 7.5)
                   Standard values: 7.5 for Chinese rules, 6.5 for Japanese rules
+            max_moves: Maximum number of moves before game ends (default: board_size² × 3)
+                      Prevents infinite games during training
         """
         self.board_size = board_size
         self.board = [[Player.EMPTY for _ in range(board_size)] for _ in range(board_size)]
@@ -32,6 +34,8 @@ class GoGame:
         self.pass_count = 0
         self.game_over = False
         self.komi = komi  # Compensation for White going second
+        self.max_moves = max_moves or (board_size * board_size * 3)  # Default: 3x board size²
+        self.resigned = None  # Track if a player resigned
 
     def is_valid_position(self, row: int, col: int) -> bool:
         """Check if position is within board bounds"""
@@ -166,6 +170,10 @@ class GoGame:
         # Record move
         self.move_history.append((row, col, self.current_player))
 
+        # Check if max moves reached
+        if len(self.move_history) >= self.max_moves:
+            self.game_over = True
+
         # Switch player
         self.current_player = opponent
 
@@ -184,6 +192,16 @@ class GoGame:
         self.current_player = (
             Player.WHITE if self.current_player == Player.BLACK else Player.BLACK
         )
+
+    def resign(self, player: Player):
+        """
+        Player resigns the game.
+
+        Args:
+            player: The player who is resigning
+        """
+        self.resigned = player
+        self.game_over = True
 
     def get_score(self) -> dict:
         """

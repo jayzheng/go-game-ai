@@ -14,7 +14,15 @@ class Player(Enum):
 
 
 class GoGame:
-    def __init__(self, board_size: int = 9):
+    def __init__(self, board_size: int = 9, komi: float = 7.5):
+        """
+        Initialize Go game.
+
+        Args:
+            board_size: Size of the board (default 9x9)
+            komi: Compensation points for White (default 7.5)
+                  Standard values: 7.5 for Chinese rules, 6.5 for Japanese rules
+        """
         self.board_size = board_size
         self.board = [[Player.EMPTY for _ in range(board_size)] for _ in range(board_size)]
         self.current_player = Player.BLACK
@@ -23,6 +31,7 @@ class GoGame:
         self.ko_point: Optional[Tuple[int, int]] = None
         self.pass_count = 0
         self.game_over = False
+        self.komi = komi  # Compensation for White going second
 
     def is_valid_position(self, row: int, col: int) -> bool:
         """Check if position is within board bounds"""
@@ -178,13 +187,16 @@ class GoGame:
 
     def get_score(self) -> dict:
         """
-        Calculate score using area scoring (territory + stones)
-        Returns dict with scores for both players
+        Calculate score using area scoring (Chinese-style rules).
+        Area scoring = stones on board + surrounded empty points
+        White receives komi compensation for going second.
+
+        Returns dict with scores for both players including komi
         """
         territory = {Player.BLACK: 0, Player.WHITE: 0}
         visited = set()
 
-        # Find territories
+        # Find territories (empty regions)
         for row in range(self.board_size):
             for col in range(self.board_size):
                 if (row, col) in visited or self.board[row][col] != Player.EMPTY:
@@ -225,17 +237,33 @@ class GoGame:
                 if self.board[row][col] != Player.EMPTY:
                     stones[self.board[row][col]] += 1
 
-        # Total score = stones + territory + captures
+        # Area scoring: stones + territory
+        # White gets komi compensation
+        black_score = stones[Player.BLACK] + territory[Player.BLACK]
+        white_score = stones[Player.WHITE] + territory[Player.WHITE] + self.komi
+
         return {
-            'black': stones[Player.BLACK] + territory[Player.BLACK] + self.captured_stones[Player.BLACK],
-            'white': stones[Player.WHITE] + territory[Player.WHITE] + self.captured_stones[Player.WHITE],
+            'black': black_score,
+            'white': white_score,
             'black_stones': stones[Player.BLACK],
             'white_stones': stones[Player.WHITE],
             'black_territory': territory[Player.BLACK],
             'white_territory': territory[Player.WHITE],
             'black_captures': self.captured_stones[Player.BLACK],
-            'white_captures': self.captured_stones[Player.WHITE]
+            'white_captures': self.captured_stones[Player.WHITE],
+            'komi': self.komi
         }
+
+    def calculate_score(self) -> Tuple[float, float]:
+        """
+        Calculate final scores for both players.
+        Uses area scoring (Chinese rules) with komi.
+
+        Returns:
+            Tuple of (black_score, white_score)
+        """
+        score_dict = self.get_score()
+        return score_dict['black'], score_dict['white']
 
     def get_legal_moves(self) -> List[Tuple[int, int]]:
         """Get all legal moves for current player"""

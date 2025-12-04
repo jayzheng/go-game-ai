@@ -264,7 +264,7 @@ class PhasedTrainer:
                         'move_number': move_count + 1,
                         'player': 'black' if game.current_player == Player.BLACK else 'white',
                         'position': [row, col],
-                        'board_state': [[int(cell) for cell in row] for row in game.board]
+                        'board_state': [[cell.value for cell in board_row] for board_row in game.board]
                     })
                     game.make_move(row, col)
 
@@ -274,8 +274,8 @@ class PhasedTrainer:
             game.game_over = True
             black_score, white_score = game.calculate_score()
             game_record['final_score'] = {
-                'black': black_score,
-                'white': white_score,
+                'black': float(black_score),
+                'white': float(white_score),
                 'winner': 'black' if black_score > white_score else 'white' if white_score > black_score else 'draw'
             }
 
@@ -286,7 +286,8 @@ class PhasedTrainer:
         label_str = f"_{label}" if label else ""
         filename = self.games_dir / f"games_ep{checkpoint_episode}{label_str}.json"
         with open(filename, 'w') as f:
-            json.dump(recorded_games, f, indent=2)
+            # Convert any numpy types to Python native types for JSON serialization
+            json.dump(recorded_games, f, indent=2, default=lambda x: float(x) if hasattr(x, 'item') else x)
 
         print(f"Saved {num_games} games to {filename}")
 
